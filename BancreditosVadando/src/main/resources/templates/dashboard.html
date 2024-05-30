@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Funcionarios</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {height: 550px}
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+      background-color: #f4f4f4;
+      height: 100%;
+      padding: 20px;
+      border-right: 1px solid #ddd;
+    }
+
+    .nav-pills > li.active > a,
+    .nav-pills > li.active > a:hover,
+    .nav-pills > li.active > a:focus {
+        color: #fff;
+        background-color: #4CAF50;
+    }
+
+    .nav-pills > li > a {
+        color: #45a049;
+        font-size: 20px;
+        border: 1px solid #ddd; /* Add border to list elements */
+        border-radius: 5px; /* Add border radius */
+        margin-bottom: 5px; /* Add margin bottom */
+    }
+
+    /* On small screens, set height to 'auto' for the grid */
+    @media screen and (max-width: 767px) {
+      .row.content {height: auto;}
+    }
+
+    .well {
+        background-color: #f4f4f4;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .well h4 {
+        color: #4CAF50;
+        margin-top: 0;
+    }
+
+    .well p {
+        color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row content">
+        <div class="col-sm-3 sidenav hidden-xs">
+            <h2 class="list-heading">Creditos Vadando</h2> <!-- Change "Logo" to "Creditos Vadando" in green -->
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active" th:text="'Bienvenido ' + ${officer.firstName}" style="font-size: 20px;"></li> <!-- Make "Bienvenido + name" text bigger -->
+                <li><a class="list" href="#" th:href="@{/creditsOfficer}" style="font-size: 20px;">Ver creditos asignados</a></li>
+                <li><a class="list" href="#" th:href="@{/approvingCredit}" style="font-size: 20px;">Aprobacion de creditos</a></li>
+                <li><a class="list" href="#" th:href="@{/changePassword}" style="font-size: 20px;">Modificar contraseña (WIP)</a></li>
+            </ul>
+            <br>
+            <!-- Add "Cerrar sesión" and "Volver al inicio" buttons -->
+            <div style="margin-top: 20px;"> <!-- Add margin-top for spacing -->
+                <form th:action="@{/logout}" method="post" style="display: inline-block; margin-right: 10px;"> <!-- Use inline-block to display buttons side by side and add margin-right for spacing -->
+                    <button class="btn btn-success" type="submit">Cerrar sesión</button>
+                </form>
+                <a th:href="@{/}" class="btn btn-success" style="margin-left: 10px;">Volver al inicio</a> <!-- Add margin-left for spacing -->
+            </div>
+        </div>
+        <br>
+
+
+
+        <!--<div class="col-sm-9">
+            <div class="well">
+                <h4>Dashboard</h4>
+                <p>Some text..</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Users</h4>
+                        <p>1 Million</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Pages</h4>
+                        <p>100 Million</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Sessions</h4>
+                        <p>10 Million</p>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="well">
+                        <h4>Bounce</h4>
+                        <p>30%</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                        <p>Text</p>
+                        <p>Text</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="well">
+                        <p>Text</p>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="well">
+                        <p>Text</p>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Aprobar credito</title>
+    <style>
+        /* Styles for Showcase */
+        .centered {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .showcase {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        .showcase-item {
+            margin-bottom: 10px;
+        }
+
+        .showcase-item label {
+            font-weight: bold;
+        }
+
+        .showcase-item span {
+            display: inline-block;
+            min-width: 150px;
+            margin-left: 10px;
+        }
+        .centered-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+
+
+    </style>
+
+</head>
+<body>
+
+
+<div class="centered">
+    <div class="showcase">
+        <h1>Datos del Crédito</h1>
+        <div class="showcase-item">
+            <p>
+                <span>Serial:</span>
+                <span th:text="${credit.id}">001</span>
+            </p>
+            <p>
+                <span>Tipo de Crédito:</span>
+                <span th:text="${credit.type}">Tipo de Crédito</span>
+            </p>
+            <p>
+                <span>Interés:</span>
+                <span th:text="${credit.interest}">Interés</span>
+            </p>
+            <p>
+                <span>Cantidad Solicitada:</span>
+                <span th:text="'$ '+  ${totalString}">Cantidad Solicitada</span>
+            </p>
+            <p>
+                <span>Cantidad Restante:</span>
+                <span th:text="'$ '+  ${currentString}">Cantidad Restante</span>
+            </p>
+            <p>
+                <span>Fecha de Corte:</span>
+                <span th:text="${credit.datePayment}">Fecha de Corte</span>
+            </p>
+            <p>
+                <span>Estado:</span>
+                <span th:text="${credit.type}">Estado</span>
+            </p>
+        </div>
+        <hr>
+        <div class="showcase-item">
+            <strong>Funcionario</strong>
+            <p th:if="${credit.officer != null}">
+                <span>Cedula del Funcionario:</span>
+                <span th:text="${credit.officer.id}">ID del Funcionario</span>
+            </p>
+            <p th:if="${credit.officer != null}">
+                <span>Nombre del Funcionario:</span>
+                <span th:text="${credit.officer.firstName + ' ' + credit.officer.lastName}">Nombre del Funcionario</span>
+            </p>
+            <p th:unless="${credit.officer != null}">
+                <span>No hay información del funcionario</span>
+            </p>
+        </div>
+        <hr>
+        <div class="showcase-item">
+            <strong>Cliente</strong>
+            <p>
+                <span>Cédula:</span>
+                <span th:text="${credit.client.id}">Cédula</span>
+            </p>
+            <p>
+                <span>Nombre del Cliente:</span>
+                <span th:text="${credit.client.firstName + ' ' + credit.client.lastName}">Nombre del Cliente</span>
+            </p>
+            <p>
+                <span>Correo:</span>
+                <span th:text="${credit.client.email}">Correo</span>
+            </p>
+            <p>
+                <span>Dirección:</span>
+                <span th:text="${credit.client.address}">Dirección</span>
+            </p>
+            <p>
+                <span>Número de Teléfono:</span>
+                <span th:text="${credit.client.phone}">Número de Teléfono</span>
+            </p>
+            <p>
+                <span>Salario:</span>
+                <span th:text="'$ '+  ${incomeString}">Salario</span>
+            </p>
+        </div>
+
+        <hr>
+        <div class="centered-button">
+            <form th:action="@{'/approve?id=' + ${credit.id}}" method="post">
+                <input type="radio" id="approveTrue" name="approve" value="true">
+                <label for="approveTrue">Aprobar</label>
+                <input type="radio" id="approveFalse" name="approve" value="false">
+                <label for="approveFalse">No aprobar</label>
+                <br>
+                <label for="dateCutoff">Fecha de Corte:</label>
+                <select id="dateCutoff" name="dateCutoff">
+                    <option value="9">9</option>
+                    <option value="21">21</option>
+                </select>
+                <br>
+                <button type="submit" class="button">Enviar</button>
+            </form>
+            <hr>
+            <button type="button" th:onclick="|window.location.href='@{/approvingCredit}'|">Regresar</button>
+
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    // JavaScript to enable/disable the "Fecha de Corte" dropdown based on radio button selection
+    document.querySelectorAll('input[name="approveCredit"]').forEach(function(radio) {
+        radio.addEventListener('change', function() {
+            var fechaCorte = document.getElementById('fechaCorte');
+            fechaCorte.disabled = this.value !== 'yes';
+        });
+    });
+
+</script>
+</body>
+</html>

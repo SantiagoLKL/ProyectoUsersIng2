@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitud de Crédito de Consumo</title>
+    <style>
+        /* Estilos CSS para mejorar la apariencia del formulario */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        label.noTitle {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="email"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        button{
+         background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover{
+        background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<form th:action="@{/credit}" method="post" th:object="${credit}">
+    <label for="idClient">No. Documento:</label>
+    <input th:field="*{idClient}" type="text" id="idClient" required>
+
+    <label for="firstName">Nombre completo:</label>
+    <input th:field="*{firstName}" type="text" id="firstName"  required>
+
+    <label for="lastName">Apellido completo:</label>
+    <input th:field="*{lastName}" type="text" id="lastName" required>
+
+    <label for="address">Dirección:</label>
+    <input th:field="*{address}" type="text" id="address" required>
+
+    <label for="phone">Número de celular:</label>
+    <input th:field="*{phone}" type="text" id="phone" required>
+
+    <label for="email">Correo electrónico:</label>
+    <input th:field="*{email}" type="email" id="email" required>
+
+    <label for="income">Salario mensual:</label>
+    <input th:field="*{income}" type="number" id="income" required>
+
+    <label for="type">Tipo de crédito a solicitar:</label>
+    <select th:field="*{type}" id="type" required>
+        <option value="">Seleccione el tipo de crédito</option>
+        <option value="HOME">Vivienda</option>
+        <option value="VEHICLE">Vehículo</option>
+        <option value="STUDIES">Estudio</option>
+        <option value="WALLET">Cartera</option>
+        <option value="FREE">Libre</option>
+    </select>
+
+    <label for="totalAmount">Cantidad a solicitar:</label>
+    <input th:field="*{totalAmount}" type="text" id="totalAmount" required>
+
+    <label for="monthsTime">No. Cuotas:</label>
+    <input th:field="*{monthsTime}" type="number" id="monthsTime" required>
+
+
+
+
+    <div th:if="${firstTime}==false">
+        <label for="monthsTime">Valor primera Cuota</label>
+
+        <div th:text="${fee}"></div>
+
+        <div >*Verifique el valor de la cuota para radicar la solicitud</div>
+
+
+    </div>
+
+    <p></p>
+
+
+    <input type="submit" value="Enviar Solicitud">&nbsp;&nbsp;&nbsp;
+    <button type="button" th:onclick="|window.location.href='@{/}'|">Regresar al Inicio</button>
+
+
+
+
+
+</form>
+</body>
+</html>
