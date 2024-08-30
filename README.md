@@ -1,2 +1,2 @@
-# BancreditosVadando
-Proyecto Ing. Software 1
+# Proyecto Usuarios Ing2
+Proyecto Ing. Software2
